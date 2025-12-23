@@ -1,0 +1,66 @@
+<h2>Welcome to Deals Dashboard</h2>
+
+<div *ngIf="isAdmin || isAnalyst">
+<h3>{{ editingDealId ? 'Update Deal' : 'Create New Deal' }}</h3>
+
+<form (ngSubmit)="saveDeal()">
+
+  <label>Company Name</label><br />
+  <input type="text" [(ngModel)]="newDeal.companyName" name="companyName" required />
+  <br /><br />
+
+  <!-- 🔐 ADMIN ONLY -->
+  <div *ngIf="isAdmin">
+    <label>Deal Amount</label><br />
+    <input type="number" [(ngModel)]="newDeal.dealAmount" name="dealAmount" />
+    <br /><br />
+  </div>
+
+  <label>Description</label><br />
+  <input type="text" [(ngModel)]="newDeal.description" name="description" />
+  <br /><br />
+
+  <label>Status</label><br />
+  <select [(ngModel)]="newDeal.statusId" name="statusId">
+    <option [value]="1">NEW</option>
+    <option [value]="2">IN_REVIEW</option>
+    <option [value]="3">APPROVED</option>
+    <option [value]="4">REJECTED</option>
+    <option [value]="5">CLOSED</option>
+  </select>
+  <br /><br />
+
+  <button type="submit">
+    {{ editingDealId ? 'Update Deal' : 'Create Deal' }}
+  </button>
+
+</form>
+</div>
+<hr />
+
+<h3>Deals List</h3>
+
+<ul *ngIf="deals.length">
+  <li *ngFor="let deal of deals">
+    <strong>{{ deal.companyName }}</strong><br />
+
+    <!-- 🔐 ADMIN ONLY -->
+    <div *ngIf="isAdmin">
+      Amount: ₹{{ deal.dealAmount }}<br />
+    </div>
+
+    Status: {{ deal.status }}<br />
+    Assigned To: {{ deal.assignedTo }}<br /><br />
+
+    <button (click)="editDeal(deal)">✏️ Edit</button>
+
+    <!-- 🔐 ADMIN ONLY -->
+    <button *ngIf="isAdmin" (click)="deleteDeal(deal.id)">🗑️ Delete</button>
+  </li>
+</ul>
+
+<button (click)="logout()">Logout</button>
+
+
+
+
