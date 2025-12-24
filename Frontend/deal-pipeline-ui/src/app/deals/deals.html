@@ -1,6 +1,6 @@
 <h2>Welcome to Deals Dashboard</h2>
 
-<div *ngIf="isAdmin || isAnalyst">
+<div *ngIf="isAdmin || isAnalyst" id="name">
 <h3>{{ editingDealId ? 'Update Deal' : 'Create New Deal' }}</h3>
 
 <form (ngSubmit)="saveDeal()">
@@ -30,7 +30,7 @@
   </select>
   <br /><br />
 
-  <button type="submit">
+  <button type="submit" id="updatebtn">
     {{ editingDealId ? 'Update Deal' : 'Create Deal' }}
   </button>
 
@@ -52,14 +52,14 @@
     Status: {{ deal.status }}<br />
     Assigned To: {{ deal.assignedTo }}<br /><br />
 
-    <button (click)="editDeal(deal)">✏️ Edit</button>
+    <button (click)="editDeal(deal)" id="editbtn">✏️ Edit</button>
 
     <!-- 🔐 ADMIN ONLY -->
-    <button *ngIf="isAdmin" (click)="deleteDeal(deal.id)">🗑️ Delete</button>
+    <button *ngIf="isAdmin" (click)="deleteDeal(deal.id)" id="deletebtn">🗑️ Delete</button>
   </li>
 </ul>
 
-<button (click)="logout()">Logout</button>
+<button (click)="logout()" id="logout-btn">Logout</button>
 
 
 

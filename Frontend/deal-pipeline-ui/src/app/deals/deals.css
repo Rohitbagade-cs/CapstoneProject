@@ -1,0 +1,393 @@
+/* Body and main container */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: #1a202c;
+}
+
+/* Main container */
+div {
+  padding: 3rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Page heading */
+h2 {
+  margin: 0 0 2.5rem 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a202c;
+  text-align: center;
+  letter-spacing: -0.5px;
+  animation: slideDown 0.4s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Section headings */
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #5A7ACD;
+  margin: 0 auto ;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Form container */
+form {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2rem;
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Labels */
+label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 1.25rem 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Input fields and selects */
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  font-size: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  outline: none;
+  transition: all 0.3s ease;
+  background: #f7fafc;
+  color: #2d3748;
+  box-sizing: border-box;
+  font-family: inherit;
+  margin-bottom: 1.25rem;
+}
+
+input[type="text"]::placeholder,
+input[type="number"]::placeholder {
+  color: #a0aec0;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+  border-color: #3b82f6;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Remove default br spacing */
+br {
+  display: none;
+}
+
+/* Deals list */
+/* Deals list - Grid layout */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+li {
+  background: #ffffff;
+  padding: 1.75rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border-left: 4px solid #3b82f6;
+  display: flex;
+  flex-direction: column;
+}
+
+li:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+li strong {
+  font-size: 1.15rem;
+  color: #1a202c;
+  display: block;
+  margin-bottom: 1rem;
+  word-break: break-word;
+}
+
+li br {
+  display: none;
+}
+
+/* Deal info sections */
+li div {
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+li div:last-of-type {
+  margin-bottom: 1.25rem;
+}
+
+/* Button container at bottom */
+li::after {
+  content: '';
+  display: block;
+  margin-top: auto;
+}
+
+/* Buttons within list items */
+button[id="editbtn"],
+button[id="deletebtn"] {
+  padding: 0.65rem 1.1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  border: 2px solid;
+  display: inline-block;
+  margin-right: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+button[id="editbtn"] {
+  color: #2563eb;
+  background: #dbeafe;
+  border-color: #2563eb;
+}
+
+button[id="editbtn"]:hover {
+  background: #2563eb;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+button[id="deletebtn"] {
+  color: #dc2626;
+  background: #fee2e2;
+  border-color: #dc2626;
+}
+
+button[id="deletebtn"]:hover {
+  background: #dc2626;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+/* Responsive grid */
+@media (max-width: 1024px) {
+  ul {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  ul {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  li {
+    padding: 1.5rem;
+  }
+
+  li strong {
+    font-size: 1.05rem;
+  }
+
+  button[id="editbtn"],
+  button[id="deletebtn"] {
+    display: block;
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 0.75rem;
+  }
+
+  button[id="deletebtn"] {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  ul {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  li {
+    padding: 1.25rem;
+  }
+
+  button[id="editbtn"],
+  button[id="deletebtn"] {
+    display: block;
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 0.75rem;
+  }
+
+  button[id="deletebtn"] {
+    margin-bottom: 0;
+  }
+}
+
+
+
+
+/* Primary button (Create/Update) */
+button[id="updatebtn"] {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-family: inherit;
+  margin-top: 0.5rem;
+}
+
+button[id="updatebtn"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+}
+
+button[id="updatebtn"]:active {
+  transform: translateY(0);
+}
+
+
+
+/* Logout button */
+button[id="logout-btn"] {
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1f2937;
+  background: #e5e7eb;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: inherit;
+  margin-top: 1rem;
+}
+
+button[id="logout-btn"]:hover {
+  background: #d1d5db;
+  transform: translateY(-2px);
+}
+
+/* Horizontal rule */
+hr {
+  border: none;
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+  margin: 2.5rem 0;
+}
+
+/* Admin-only sections */
+#name {
+  margin-top: 1.25rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  div {
+    padding: 2rem 1rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  form {
+    padding: 1.5rem;
+  }
+
+  li {
+    padding: 1.25rem;
+  }
+
+  button[id="editbtn"],
+  button[id="deletebtn"] {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  form {
+    padding: 1.25rem;
+  }
+
+  input,
+  select {
+    font-size: 16px;
+  }
+}

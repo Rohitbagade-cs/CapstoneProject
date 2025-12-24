@@ -1,0 +1,37 @@
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: capstone-mysql
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+
+  backend:
+    container_name: capstone-backend
+    build:
+      context: ./Backend/deal-pipeline/deal-pipeline   # ✅ CORRECT PATH
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+
+  frontend:
+    container_name: capstone-frontend
+    build:
+      context: ./Frontend/deal-pipeline-ui             # ✅ CORRECT PATH
+      dockerfile: Dockerfile
+    depends_on:
+      - backend
+    ports:
+      - "4200:80"
+
+volumes:
+  mysql_data:

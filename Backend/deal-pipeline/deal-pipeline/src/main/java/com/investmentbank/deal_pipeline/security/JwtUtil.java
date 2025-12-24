@@ -20,19 +20,15 @@ public class JwtUtil {
     private Key getSigningKey() {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
     }
-
-    // ✅ UPDATED METHOD (USERNAME + ROLE)
     public String generateToken(String username, String role) {
-
         return Jwts.builder()
                 .setSubject(username)
-                .claim("role", role)   // 🔥 THIS FIXES EVERYTHING
+                .claim("role", role)   // LOCALSTORAGE
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
-
     public String extractUsername(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())

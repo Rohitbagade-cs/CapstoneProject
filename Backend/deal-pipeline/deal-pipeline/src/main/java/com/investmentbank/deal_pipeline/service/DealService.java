@@ -77,19 +77,7 @@ public class DealService {
         return dealRepository.save(deal);
     }
 
-    // ==================================================
-    // UPDATE DEAL STATUS
-    // ==================================================
-//    public DealResponseDTO updateDealStatus(Long dealId, String statusName) {
-//
-//        Deal deal = dealRepository.findById(dealId)
-//                .orElseThrow(() -> new RuntimeException("Deal not found"));
-//
-//        DealStatus status = dealStatusRepository.findByName(statusName);
-//        deal.setStatus(status);
-//
-//        return mapToResponseDTO(dealRepository.save(deal));
-//    }
+
     public Deal updateDealStatus(Long dealId, DealCreateRequest request) {
 
         Deal deal = dealRepository.findById(dealId)

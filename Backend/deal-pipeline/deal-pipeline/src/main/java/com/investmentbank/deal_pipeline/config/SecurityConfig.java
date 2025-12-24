@@ -29,18 +29,6 @@ public class SecurityConfig {
     private final JwtAuthFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
 
-    // ✅ VERY IMPORTANT BEAN (THIS WAS MISSING)
-//    @Bean
-//    public AuthenticationManager authenticationManager(
-//            AuthenticationConfiguration config) throws Exception {
-//        return config.getAuthenticationManager();
-//    }
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -58,7 +46,7 @@ public class SecurityConfig {
                         // 🔐 ADMIN ONLY
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
 
-                        // 🔐 ADMIN + ANALYST
+                        // 🔐 ADMIN + USER
                         .requestMatchers(HttpMethod.GET, "/api/deals/**")
                         .hasAnyRole("ADMIN", "ANALYST")
 
@@ -85,7 +73,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:4200"));
+        config.setAllowedOrigins(List.of("http://localhost:60552"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);

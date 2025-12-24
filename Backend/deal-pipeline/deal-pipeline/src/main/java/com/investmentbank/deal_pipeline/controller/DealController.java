@@ -22,7 +22,7 @@ public class DealController {
     }
 
     // =========================================================
-    // ✅ 1. GET ALL DEALS (ADMIN, BANKER, ANALYST)
+    // ✅ 1. GET ALL DEALS (ADMIN, USER)
     // =========================================================
     @GetMapping
     public List<DealResponseDTO> getAllDeals() {
@@ -33,10 +33,6 @@ public class DealController {
     // 🔒 2. CREATE DEAL (ADMIN ONLY)
     // =========================================================
     @PreAuthorize("hasRole('ADMIN')")
-//    @PostMapping
-//    public DealResponseDTO createDeal(@RequestBody DealRequestDTO dto) {
-//        return dealService.createDeal(dto);
-//    }
     @PostMapping
     public ResponseEntity<Deal> createDeal(
             @RequestBody DealCreateRequest request) {
@@ -47,16 +43,10 @@ public class DealController {
 
 
     // =========================================================
-    // 🔁 3. UPDATE DEAL STATUS (ADMIN + BANKER)
+    // 🔁 3. UPDATE DEAL STATUS (ADMIN + USER)
     // =========================================================
     @PreAuthorize("hasAnyRole('ADMIN','BANKER')")
-//    @PutMapping("/{dealId}/status")
-//    public DealResponseDTO updateDealStatus(
-//            @PathVariable Long dealId,
-//            @RequestParam String status
-//    ) {
-//        return dealService.updateDealStatus(dealId, status);
-//    }
+
     @PutMapping("/{id}")
     public ResponseEntity<?> updateDealStatus(
             @PathVariable Long id,
