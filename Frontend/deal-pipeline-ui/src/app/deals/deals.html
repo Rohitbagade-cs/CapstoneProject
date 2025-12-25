@@ -1,66 +1,117 @@
-<h2>Welcome to Deals Dashboard</h2>
+<body>
+<div class="dashboard">
 
-<div *ngIf="isAdmin || isAnalyst" id="name">
-<h3>{{ editingDealId ? 'Update Deal' : 'Create New Deal' }}</h3>
+  <!-- ================= HEADER ================= -->
+  <header class="dashboard__header">
+    <h2 class="dashboard__title">Deals Dashboard</h2>
+    <button class="btn btn--logout" (click)="logout()">
+      <div class="icon"></div>
+      <div class="text">Logout</div>
+    </button>
+  </header>
 
-<form (ngSubmit)="saveDeal()">
+  <!-- ================= CREATE / UPDATE DEAL ================= -->
+  <section *ngIf="isAdmin || isAnalyst" class="card">
+    <h3 class="card__title">
+      {{ editingDealId ? 'Update Deal' : 'Create New Deal' }}
+    </h3>
 
-  <label>Company Name</label><br />
-  <input type="text" [(ngModel)]="newDeal.companyName" name="companyName" required />
-  <br /><br />
+    <form class="form" (ngSubmit)="saveDeal()">
 
-  <!-- 🔐 ADMIN ONLY -->
-  <div *ngIf="isAdmin">
-    <label>Deal Amount</label><br />
-    <input type="number" [(ngModel)]="newDeal.dealAmount" name="dealAmount" />
-    <br /><br />
-  </div>
+      <div class="form-group">
+        <label>Company Name</label>
+        <input
+          type="text"
+          [(ngModel)]="newDeal.companyName"
+          name="companyName"
+          required
+          placeholder="Enter company name"
+        />
+      </div>
 
-  <label>Description</label><br />
-  <input type="text" [(ngModel)]="newDeal.description" name="description" />
-  <br /><br />
+      <!-- 🔐 ADMIN ONLY -->
+      <div class="form-group" *ngIf="isAdmin">
+        <label>Deal Amount</label>
+        <input
+          type="number"
+          [(ngModel)]="newDeal.dealAmount"
+          name="dealAmount"
+          placeholder="Enter deal amount"
+        />
+      </div>
 
-  <label>Status</label><br />
-  <select [(ngModel)]="newDeal.statusId" name="statusId">
-    <option [value]="1">NEW</option>
-    <option [value]="2">IN_REVIEW</option>
-    <option [value]="3">APPROVED</option>
-    <option [value]="4">REJECTED</option>
-    <option [value]="5">CLOSED</option>
-  </select>
-  <br /><br />
+      <div class="form-group">
+        <label>Description</label>
+        <input
+          type="text"
+          [(ngModel)]="newDeal.description"
+          name="description"
+          placeholder="Deal description"
+        />
+      </div>
 
-  <button type="submit" id="updatebtn">
-    {{ editingDealId ? 'Update Deal' : 'Create Deal' }}
-  </button>
+      <div class="form-group">
+        <label>Status</label>
+        <select [(ngModel)]="newDeal.statusId" name="statusId">
+          <option [value]="1">NEW</option>
+          <option [value]="2">IN_REVIEW</option>
+          <option [value]="3">APPROVED</option>
+          <option [value]="4">REJECTED</option>
+          <option [value]="5">CLOSED</option>
+        </select>
+      </div>
 
-</form>
+      <button class="btn btn--primary" type="submit">
+        {{ editingDealId ? 'Update Deal' : 'Create Deal' }}
+      </button>
+    </form>
+  </section>
+
+  <!-- ================= DEALS LIST ================= -->
+  <section class="card">
+    <h3 class="card__title">Deals List</h3>
+
+    <p *ngIf="!deals.length" class="empty-state">
+      No deals available
+    </p>
+
+    <ul class="deal-list" *ngIf="deals.length">
+      <li class="deal-item" *ngFor="let deal of deals">
+
+        <div class="deal-item__header">
+          <strong class="cname">{{ deal.companyName }}</strong>
+          <span class="badge">{{ deal.status }}</span>
+        </div>
+
+        <div class="deal-item__body">
+          <p *ngIf="isAdmin">
+            <strong>Amount:</strong> ₹{{ deal.dealAmount }}
+          </p>
+          <p>
+            <strong>Assigned To:</strong> {{ deal.assignedTo }}
+          </p>
+          <p>
+            <strong>Description:</strong> {{ deal.description }}
+          </p>
+        </div>
+
+        <div class="deal-item__actions">
+          <button class="btn btn--secondary" (click)="editDeal(deal)">
+            ✏️ Edit
+          </button>
+
+          <button
+            *ngIf="isAdmin"
+            class="btn btn--danger"
+            (click)="deleteDeal(deal.id)"
+          >
+            🗑️ Delete
+          </button>
+        </div>
+
+      </li>
+    </ul>
+  </section>
+
 </div>
-<hr />
-
-<h3>Deals List</h3>
-
-<ul *ngIf="deals.length">
-  <li *ngFor="let deal of deals">
-    <strong>{{ deal.companyName }}</strong><br />
-
-    <!-- 🔐 ADMIN ONLY -->
-    <div *ngIf="isAdmin">
-      Amount: ₹{{ deal.dealAmount }}<br />
-    </div>
-
-    Status: {{ deal.status }}<br />
-    Assigned To: {{ deal.assignedTo }}<br /><br />
-
-    <button (click)="editDeal(deal)" id="editbtn">✏️ Edit</button>
-
-    <!-- 🔐 ADMIN ONLY -->
-    <button *ngIf="isAdmin" (click)="deleteDeal(deal.id)" id="deletebtn">🗑️ Delete</button>
-  </li>
-</ul>
-
-<button (click)="logout()" id="logout-btn">Logout</button>
-
-
-
-
+</body>
