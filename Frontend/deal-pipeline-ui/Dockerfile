@@ -13,7 +13,7 @@ RUN npm run build
 FROM nginx:alpine
 
 # 🔥 THIS LINE MUST MATCH YOUR dist FOLDER
-COPY --from=build /app/dist/deal-pipeline-ui /usr/share/nginx/html
+COPY --from=build /app/dist/deal-pipeline-ui/browser /usr/share/nginx/html
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
