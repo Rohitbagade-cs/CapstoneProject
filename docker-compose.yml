@@ -4,8 +4,8 @@ services:
     image: mysql:8.0
     container_name: capstone-mysql
     environment:
-      MYSQL_DATABASE: deal_pipeline_db
-      MYSQL_ROOT_PASSWORD: Rohit@123
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
@@ -28,6 +28,8 @@ services:
       - .env
     ports:
       - "8080:8080"
+    expose:
+      - "8080"
 
   frontend:
     container_name: capstone-frontend
@@ -37,7 +39,7 @@ services:
     depends_on:
       - backend
     ports:
-      - "4200:80"
+      - "80:80"
 
 volumes:
   mysql_data:
